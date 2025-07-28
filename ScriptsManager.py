@@ -239,131 +239,148 @@ class EditScriptPanel(nukescripts.PythonPanel):
                 self.setFromDefaults(kn,scr)
         self.disableKnobsIfCustomCommand()
 
-
-#добавиляет/изменяет информацию о скрипте в файле scripts_info.json
 def edit_script_info():
-    scripts = get_scripts()#получаем все доступные скрипты в алфавитном порядке
+    """Добавляет/изменяет информацию о скрипте в файле scripts_info.json."""
+    scripts = get_scripts()  # Получаем все доступные скрипты в алфавитном порядке
     if not scripts:
-        nuke.message('Не нашел ни одного скрипта в папке scripts')
+        nuke.message("Не нашел ни одного скрипта в папке scripts")
         return
-    if not os.path.isfile(infoFile):#создаем файл scripts_info.json если его не существует
-        with open(infoFile, 'w') as file:
+    if not os.path.isfile(infoFile):  # Создаем файл scripts_info.json если его не существует
+        with open(infoFile, "w") as file:
             json.dump({}, file, indent=4)
-    with open(infoFile, 'r') as file:#читаем данные из info файла
+    with open(infoFile, "r") as file:  # Читаем данные из info файла
         info = json.load(file)
-    p = EditScriptPanel(scripts,info)
-    if p.showModalDialog():#если пользователь нажал OK
-        info[p.my_knobs[0].value()] = {kn.name(): kn.value() for kn in p.my_knobs[2:]}#menu_name мы не записываем, потомучто оно содержится в menu_path
-        with open(infoFile, 'w') as file:#записываем данные в файл
+    p = EditScriptPanel(scripts, info)
+    if p.showModalDialog():  # Если пользователь нажал OK
+        info[p.my_knobs[0].value()] = {kn.name(): kn.value() for kn in p.my_knobs[2:]}  # menu_name мы не записываем, потому что оно содержится в menu_path
+        with open(infoFile, "w") as file:  # Записываем данные в файл
             json.dump(info, file, indent=4)
         updateUsersMenu()
 
-#удаляет запись о скрипте в файле scripts_info.json
-#при этом у пользователей этот скрипт не удалится, но он больше не появится в списке выбора Scripts Manager
-#просто когда пользователь пойдет настраивать свои скрипты, они у него обновятся и скрипт пропадет
 def remove_script_info():
+    """
+    Удаляет запись о скрипте в файле scripts_info.json.
+    При этом у пользователей этот скрипт не удалится, но он больше не появится
+    в списке выбора Scripts Manager. Просто когда пользователь пойдет настраивать
+    свои скрипты, они у него обновятся и скрипт пропадет.
+    """
     if not os.path.isfile(infoFile):
-        nuke.message('Нужен файл scripts_info.json')
+        nuke.message("Нужен файл scripts_info.json")
         return
-    with open(infoFile, 'r') as file:#читаем данные из info файла
+    with open(infoFile, "r") as file:  # Читаем данные из info файла
         info = json.load(file)
-    p = nuke.Panel('Remove Script')
+    p = nuke.Panel("Remove Script")
     p.setWidth(226)
     for script in info:
-        p.addBooleanCheckBox(script,False)
+        p.addBooleanCheckBox(script, False)
     if p.show():
-        for script in list(info.keys()):#list(info.keys()) помогает предотвратить ошибку RuntimeError: dictionary changed size during iteration потому что возвращает копию списка
+        for script in list(info.keys()):  # list(info.keys()) помогает предотвратить ошибку RuntimeError: dictionary changed size during iteration потому что возвращает копию списка
             if p.value(script):
-                info.pop(script)#можно использовать pop так как мы проходимся по копии списка используя list(info.keys())
-        with open(infoFile, 'w') as file:
+                info.pop(script)  # Можно использовать pop так как мы проходимся по копии списка используя list(info.keys())
+        with open(infoFile, "w") as file:
             json.dump(info, file, indent=4)
-        updateUsersMenu()#обновляем настройки у пользователей, чтобы убрать только что удаленные скрипты
+        updateUsersMenu()  # Обновляем настройки у пользователей, чтобы убрать только что удаленные скрипты
 
-#при загрузке нюка создает для пользователя дефолтные настройки если у пользователя еще нет настроек
-#чтобы при первой загрузке у пользователя уже были необходимые скрипты такие как ReadFromWrite и Reveal in Folder
-#по умолчанию функция выполняется для текущего пользователя, но можно передать файлы userDataFile и userMenuFile для кастомного пользователя(используется в updateUsersMenu)
-def createUserDefaultSettings(userDataFile=userDataFile,userMenuFile=userMenuFile):
-    #если настройки есть, ничего делать не нужно, если нет хотябы одного файла, будем один создавать, другой перезаписывать
+def createUserDefaultSettings(userDataFile=userDataFile, userMenuFile=userMenuFile):
+    """
+    При загрузке Nuke создает для пользователя дефолтные настройки, если у него их еще нет.
+    Это нужно, чтобы при первой загрузке у пользователя уже были необходимые скрипты,
+    такие как ReadFromWrite и Reveal in Folder. По умолчанию функция выполняется
+    для текущего пользователя, но можно передать `userDataFile` и `userMenuFile`
+    для кастомного пользователя (используется в `updateUsersMenu`).
+    """
+    # Если настройки есть, ничего делать не нужно. Если нет хотя бы одного файла, будем один создавать, другой перезаписывать.
     if os.path.isfile(userDataFile) and os.path.isfile(userMenuFile):
         return
-    scripts = get_scripts()#получаем все доступные скрипты в алфавитном порядке
-    if not scripts:#если никаких скриптов нету, выходим из функции
+    scripts = get_scripts()  # Получаем все доступные скрипты в алфавитном порядке
+    if not scripts:  # Если никаких скриптов нету, выходим из функции
         return
-    if not os.path.isfile(infoFile):#проверяем существует ли scripts_info.json в нем хранится информация о дефолтных скриптах
+    if not os.path.isfile(infoFile):  # Проверяем существует ли scripts_info.json, в нем хранится информация о дефолтных скриптах
         return
-    with open(infoFile, 'r') as file:#читаем данные из info файла
+    with open(infoFile, "r") as file:  # Читаем данные из info файла
         info = json.load(file)
-    if not os.path.isdir(userFolder):#если нету папки для пользователя, создадим ее
+    if not os.path.isdir(userFolder):  # Если нету папки для пользователя, создадим ее
         os.makedirs(userFolder)
     data = {}
-    file = open(userMenuFile,'w', encoding='utf-8')#запишем дефолтные менюшки для пользователя
-    for scr in scripts:#проходимся по всем скриптам
-        if info.get(scr)==None:#проверяем что для скрипта есть информация
+    file = open(userMenuFile, "w", encoding="utf-8")  # Запишем дефолтные менюшки для пользователя
+    for scr in scripts:  # Проходимся по всем скриптам
+        if info.get(scr) is None:  # Проверяем что для скрипта есть информация
             continue
-        data[scr] = info[scr]['default']#записываем включен или выключен плагин
-        if info[scr]['default']:#если это дефолтный скрипт, его нужно добавить в menu.py файл
-            writeAndAddMenu(file,info[scr])#не создаем меню сразу потому что создаем файл menu.py и меню будет создано автоматически из файла
+        data[scr] = info[scr]["default"]  # Записываем включен или выключен плагин
+        if info[scr]["default"]:  # Если это дефолтный скрипт, его нужно добавить в menu.py файл
+            writeAndAddMenu(file, info[scr])  # Не создаем меню сразу, потому что создаем файл menu.py и меню будет создано автоматически из файла
     file.close()
-    with open(userDataFile, 'w') as file:
+    with open(userDataFile, "w") as file:
         json.dump(data, file, indent=4)
 
-#для всех пользователей в папке users заново создает menu.py основываясь на его включенных скриптах в userDataFile и новой информации из scripts_info.json которой у пользователя еще нету
-#если у пользователя нет файла data.json или menu.py создадим их вызвав функцию createUserDefaultSettings
-#эта функция вызывается в edit_script_info после изменения информации о скриптах
-#и в remove_script_info чтобы обновить удаленные скрипты
 def updateUsersMenu():
-    scripts = get_scripts()#получаем все доступные скрипты в алфавитном порядке
-    if not scripts:#если никаких скриптов нету, выходим из функции
+    """
+    Для всех пользователей в папке users заново создает menu.py.
+    Создание происходит на основе включенных скриптов в userDataFile и новой
+    информации из scripts_info.json, которой у пользователя еще нет.
+    Если у пользователя нет файла data.json или menu.py, они будут созданы
+    с помощью `createUserDefaultSettings`. Эта функция вызывается в `edit_script_info`
+    после изменения информации о скриптах и в `remove_script_info` чтобы
+    обновить удаленные скрипты.
+    """
+    scripts = get_scripts()  # Получаем все доступные скрипты в алфавитном порядке
+    if not scripts:  # Если никаких скриптов нету, выходим из функции
         return
-    if not os.path.isfile(infoFile):#проверяем существует ли scripts_info.json
+    if not os.path.isfile(infoFile):  # Проверяем существует ли scripts_info.json
         return
-    with open(infoFile, 'r') as file:#читаем данные из info файла
+    with open(infoFile, "r") as file:  # Читаем данные из info файла
         info = json.load(file)
-    if not os.path.isdir(f'{curDir}/users'):#нужно проверить что существует папка с пользователями, перед следующей операцией os.listdir
+    users_dir = f"{curDir}/users"
+    if not os.path.isdir(users_dir):  # Нужно проверить что существует папка с пользователями, перед следующей операцией os.listdir
         return
-    for user in os.listdir(f'{curDir}/users'):#проходимся по папкам и файлам в папке со всеми пользователями
-        userFolder = f'{curDir}/users/{user}'
-        if os.path.isdir(userFolder):#проверяем что это папка а не файл
-            userDataFile = f'{userFolder}/data.json'
-            userMenuFile = f'{userFolder}/menu.py'
-            if os.path.isfile(userDataFile) and os.path.isfile(userMenuFile):#проверяем что есть оба файла настроек
-                with open(userDataFile, 'r') as file:
-                    userData = json.load(file)#информация о включенных/выключенных скриптах, к ней в итоге добавим новую инфу или удалим то что уже не актуально
-                data = {}#новая data которую мы запишем в userDataFile
-                file = open(userMenuFile,'w', encoding='utf-8')
-                for scr in scripts:#проходимся по всем скриптам
-                    if info.get(scr)==None:#проверяем что для скрипта есть информация(если нету, этот скрипт не будет добавлен в menu.py пользователю, даже если он был там до этого)
+    for user in os.listdir(users_dir):  # Проходимся по папкам и файлам в папке со всеми пользователями
+        user_folder = f"{users_dir}/{user}"
+        if os.path.isdir(user_folder):  # Проверяем что это папка а не файл
+            user_data_file = f"{user_folder}/data.json"
+            user_menu_file = f"{user_folder}/menu.py"
+            if os.path.isfile(user_data_file) and os.path.isfile(user_menu_file):  # Проверяем что есть оба файла настроек
+                with open(user_data_file, "r") as file:
+                    userData = json.load(file)  # Информация о включенных/выключенных скриптах, к ней в итоге добавим новую инфу или удалим то что уже не актуально
+                data = {}  # Новая data которую мы запишем в userDataFile
+                file = open(user_menu_file, "w", encoding="utf-8")
+                for scr in scripts:  # Проходимся по всем скриптам
+                    if info.get(scr) is None:  # Проверяем что для скрипта есть информация (если нету, этот скрипт не будет добавлен в menu.py пользователю, даже если он был там до этого).
                         continue
-                    #нужно понять мы добавляем скрипт в menu или нет, понять это можно через уже существующий userData или если в нем нет записи, посмотреть в default
+                    # Нужно понять мы добавляем скрипт в menu или нет, понять это можно через уже существующий userData или если в нем нет записи, посмотреть в default.
                     enable = userData.get(scr)
-                    if enable==None:
-                        enable = info[scr]['default']
+                    if enable is None:
+                        enable = info[scr]["default"]
                     data[scr] = enable
                     if enable:
-                        writeAndAddMenu(file,info[scr])#не создаем меню потому что записываем menu.py не для текущего пользователя, меню будет создано у пользователя при запуске нюка
+                        writeAndAddMenu(file, info[scr])  # Не создаем меню потому что записываем menu.py не для текущего пользователя, меню будет создано у пользователя при запуске нюка.
                 file.close()
-                with open(userDataFile, 'w') as file:
+                with open(user_data_file, "w") as file:
                     json.dump(data, file, indent=4)
             else:
-                createUserDefaultSettings(userDataFile,userMenuFile)#создаем файлы настроек с нуля, добавляя только дефолтные скрипты
-                #эта функция повторяет функционал только что выполненный текущей функцией, к примеру получение скриптов scripts = get_scripts() и проверка на существование необходимых файлов
-                #но так как этот код выполняется не при загрузке скрипта, то мы можем проигнорировать оптимизацию и скорость выполнения этого скрипта
-    nuke.message('Successfully updated!')
+                createUserDefaultSettings(user_data_file, user_menu_file)  # Создаем файлы настроек с нуля, добавляя только дефолтные скрипты
+                # Эта функция повторяет функционал только что выполненный текущей функцией, к примеру получение скриптов scripts = get_scripts() и проверка на существование необходимых файлов.
+                # Но так как этот код выполняется не при загрузке скрипта, то мы можем проигнорировать оптимизацию и скорость выполнения этого скрипта.
+    nuke.message("Successfully updated!")
 
-#добавляем все папки внутир папки scripts в pluginPath для доступа к ним
-# TODO нужно делать исключения например для папок __pycache__
 def addScriptsFolderToPluginPath():
-    for root,_,_ in os.walk(scriptsDir):#если папки не существует ошибки не будет, просто не запустится цикл
-        nuke.pluginAddPath(root.replace('\\','/'))
+    """
+    Добавляет все папки внутри папки scripts в pluginPath для доступа к ним.
+    TODO: Нужно делать исключения например для папок __pycache__.
+    """
+    for root, _, _ in os.walk(scriptsDir):  # Если папки не существует ошибки не будет, просто не запустится цикл
+        nuke.pluginAddPath(root.replace("\\", "/"))
 
-#создает меню для управления скриптами
-#для обычных пользователей это просто включение и выключение скриптов
-#для избранных пользователей из списка scripts_manager_users еще и меню для управления информацией о скриптах и удаления информации о скриптах
 def createMenu():
+    """
+    Создает меню для управления скриптами.
+    Для обычных пользователей это просто включение и выключение скриптов.
+    Для избранных пользователей из списка `scripts_manager_users` еще и меню
+    для управления информацией о скриптах и удаления информации о скриптах.
+    """
     if getpass.getuser() in scripts_manager_users:
-        nuke.menu('Nuke').addCommand('Edit/Scripts Manager/Scripts Manager','ScriptsManager.scripts_manager()')#позволяет включать и выключать скрипты
-        nuke.menu('Nuke').addCommand('Edit/Scripts Manager/Edit Scripts Info','ScriptsManager.edit_script_info()')#добавление/изменение информации о скрипте
-        nuke.menu('Nuke').addCommand('Edit/Scripts Manager/Remove Script','ScriptsManager.remove_script_info()')#удаление скриптов
-        nuke.menu('Nuke').addCommand('Edit/Scripts Manager/Update Users Menus','ScriptsManager.updateUsersMenu()')#обновляет настройки для всех пользователей
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Edit Scripts Info", "ScriptsManager.edit_script_info()")  # Добавление/изменение информации о скрипте
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Remove Script", "ScriptsManager.remove_script_info()")  # Удаление скриптов
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Update Users Menus", "ScriptsManager.updateUsersMenu()")  # Обновляет настройки для всех пользователей
     else:
-        nuke.menu('Nuke').addCommand('Edit/Scripts Manager','ScriptsManager.scripts_manager()')#позволяет включать и выключать скрипты
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
