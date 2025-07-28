@@ -68,7 +68,7 @@ class ScriptsManagerPanel(nukescripts.PythonPanel):
                 kn.setFlag(nuke.STARTLINE)
                 if userData and userData.get(scr)!=None:  # Если уже есть записанные данные для пользователя, подставим их
                     kn.setValue(userData[scr])
-                kn.setTooltip(f"{info[scr]["tooltip"]}\n<i>{menu_path}</i>")  # Установим подсказку что делает скрипт
+                kn.setTooltip(f"{info[scr]['tooltip']}\n<i>{menu_path}</i>")  # Установим подсказку что делает скрипт
                 self.addKnob(kn)
                 self.scripts_knobs.append(kn)  # Добавим кноб в список кнобов которые потом надо обработать
     
@@ -109,13 +109,13 @@ def scripts_manager():
         nuke.message("Нужен файл scripts_info.json")
         return
     info, userData = [None, None]
-    with open(infoFile, "r") as file:  # Читаем данные из info файла
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
         info = json.load(file)
     if not info:  # Проверяем что удалось что-то прочитать из info
         nuke.message("Ошибка чтения файла scripts_info.json")
         return
     if os.path.isfile(userDataFile):  # Если есть файл для пользователя, тоже читаем данные
-        with open(userDataFile, "r") as file:
+        with open(userDataFile, "r", encoding="utf-8") as file:
             userData = json.load(file)
     scripts = get_scripts(True)  # Получаем все доступные скрипты в алфавитном порядке
     if not scripts:
@@ -136,8 +136,8 @@ def scripts_manager():
         else:
             removeMenu(info[scr])
     file.close()
-    with open(userDataFile, "w") as file:
-        json.dump(data, file, indent=4)
+    with open(userDataFile, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
     nuke.message("Скрипты успешно изменены!\n(возможно потребуется перезагрузить Nuke)")
 
 class EditScriptPanel(nukescripts.PythonPanel):
@@ -246,15 +246,15 @@ def edit_script_info():
         nuke.message("Не нашел ни одного скрипта в папке scripts")
         return
     if not os.path.isfile(infoFile):  # Создаем файл scripts_info.json если его не существует
-        with open(infoFile, "w") as file:
-            json.dump({}, file, indent=4)
-    with open(infoFile, "r") as file:  # Читаем данные из info файла
+        with open(infoFile, "w", encoding="utf-8") as file:
+            json.dump({}, file, indent=4, ensure_ascii=False)
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
         info = json.load(file)
     p = EditScriptPanel(scripts, info)
     if p.showModalDialog():  # Если пользователь нажал OK
         info[p.my_knobs[0].value()] = {kn.name(): kn.value() for kn in p.my_knobs[2:]}  # menu_name мы не записываем, потому что оно содержится в menu_path
-        with open(infoFile, "w") as file:  # Записываем данные в файл
-            json.dump(info, file, indent=4)
+        with open(infoFile, "w", encoding="utf-8") as file:  # Записываем данные в файл
+            json.dump(info, file, indent=4, ensure_ascii=False)
         updateUsersMenu()
 
 def remove_script_info():
@@ -267,7 +267,7 @@ def remove_script_info():
     if not os.path.isfile(infoFile):
         nuke.message("Нужен файл scripts_info.json")
         return
-    with open(infoFile, "r") as file:  # Читаем данные из info файла
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
         info = json.load(file)
     p = nuke.Panel("Remove Script")
     p.setWidth(226)
@@ -277,8 +277,8 @@ def remove_script_info():
         for script in list(info.keys()):  # list(info.keys()) помогает предотвратить ошибку RuntimeError: dictionary changed size during iteration потому что возвращает копию списка
             if p.value(script):
                 info.pop(script)  # Можно использовать pop так как мы проходимся по копии списка используя list(info.keys())
-        with open(infoFile, "w") as file:
-            json.dump(info, file, indent=4)
+        with open(infoFile, "w", encoding="utf-8") as file:
+            json.dump(info, file, indent=4, ensure_ascii=False)
         updateUsersMenu()  # Обновляем настройки у пользователей, чтобы убрать только что удаленные скрипты
 
 def createUserDefaultSettings(userDataFile=userDataFile, userMenuFile=userMenuFile):
@@ -297,7 +297,7 @@ def createUserDefaultSettings(userDataFile=userDataFile, userMenuFile=userMenuFi
         return
     if not os.path.isfile(infoFile):  # Проверяем существует ли scripts_info.json, в нем хранится информация о дефолтных скриптах
         return
-    with open(infoFile, "r") as file:  # Читаем данные из info файла
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
         info = json.load(file)
     if not os.path.isdir(userFolder):  # Если нету папки для пользователя, создадим ее
         os.makedirs(userFolder)
@@ -310,8 +310,8 @@ def createUserDefaultSettings(userDataFile=userDataFile, userMenuFile=userMenuFi
         if info[scr]["default"]:  # Если это дефолтный скрипт, его нужно добавить в menu.py файл
             writeAndAddMenu(file, info[scr])  # Не создаем меню сразу, потому что создаем файл menu.py и меню будет создано автоматически из файла
     file.close()
-    with open(userDataFile, "w") as file:
-        json.dump(data, file, indent=4)
+    with open(userDataFile, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
 
 def updateUsersMenu():
     """
@@ -328,7 +328,7 @@ def updateUsersMenu():
         return
     if not os.path.isfile(infoFile):  # Проверяем существует ли scripts_info.json
         return
-    with open(infoFile, "r") as file:  # Читаем данные из info файла
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
         info = json.load(file)
     users_dir = f"{curDir}/users"
     if not os.path.isdir(users_dir):  # Нужно проверить что существует папка с пользователями, перед следующей операцией os.listdir
@@ -339,7 +339,7 @@ def updateUsersMenu():
             user_data_file = f"{user_folder}/data.json"
             user_menu_file = f"{user_folder}/menu.py"
             if os.path.isfile(user_data_file) and os.path.isfile(user_menu_file):  # Проверяем что есть оба файла настроек
-                with open(user_data_file, "r") as file:
+                with open(user_data_file, "r", encoding="utf-8") as file:
                     userData = json.load(file)  # Информация о включенных/выключенных скриптах, к ней в итоге добавим новую инфу или удалим то что уже не актуально
                 data = {}  # Новая data которую мы запишем в userDataFile
                 file = open(user_menu_file, "w", encoding="utf-8")
@@ -354,8 +354,8 @@ def updateUsersMenu():
                     if enable:
                         writeAndAddMenu(file, info[scr])  # Не создаем меню потому что записываем menu.py не для текущего пользователя, меню будет создано у пользователя при запуске нюка.
                 file.close()
-                with open(user_data_file, "w") as file:
-                    json.dump(data, file, indent=4)
+                with open(user_data_file, "w", encoding="utf-8") as file:
+                    json.dump(data, file, indent=4, ensure_ascii=False)
             else:
                 createUserDefaultSettings(user_data_file, user_menu_file)  # Создаем файлы настроек с нуля, добавляя только дефолтные скрипты
                 # Эта функция повторяет функционал только что выполненный текущей функцией, к примеру получение скриптов scripts = get_scripts() и проверка на существование необходимых файлов.
