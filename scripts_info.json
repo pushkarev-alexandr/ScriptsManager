@@ -1,0 +1,26 @@
+{
+    "openCopy": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import openCopy; openCopy.openCopy()",
+        "custom_command": "",
+        "tooltip": "Копирует выбранный скрипт в папку temp и открывает его, чтобы не менять скрипт пользователя",
+        "icon": "",
+        "shortcut": "Ctrl+Alt+O",
+        "shortcut_context": "Без контекста",
+        "index": 2,
+        "menu_path": "File/Open Copy..."
+    },
+    "bvfx_findPath": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import bvfx_findPath; bvfx_findPath.bvfx_findPath(False)",
+        "custom_command": "",
+        "tooltip": "Переподтянет потерянные риды. Нужно указать папку в которой нужно искать потерянные файлы. Указывайте папку максимально близкую к вашему файлу иначе скрипт будет очень долго искать необходимый файл",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/File/Locate files paths"
+    }
+}

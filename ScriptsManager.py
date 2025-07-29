@@ -149,7 +149,7 @@ class EditScriptPanel(nukescripts.PythonPanel):
             info (dict): Информация о скриптах: команда, горячая клавиша и т.д.
         """
         nukescripts.PythonPanel.__init__(self, "Edit Script")
-        self.setMinimumSize(550,350)  # Увеличиваем окно
+        self.setMinimumSize(550, 350)  # Увеличиваем окно
         self.scripts = scripts  # Записываем в локальные переменные для дальнейшего доступа к ним
         self.info = info
         context_list = ["Без контекста", "0", "1", "2"]  # Список параметров для кноба shortcut_context
@@ -236,7 +236,7 @@ class EditScriptPanel(nukescripts.PythonPanel):
             self.menu_path.setValue(f"{self.scripts[scr]}/{self.menu_name.value()}")  # Затем выставляем menu_path из scripts(на случай если мы переместили скрипт в новое место)
         else:  # Дефолтные значения для кнобов
             for kn in self.my_knobs[1:]:  # Для каждого кноба ищем дефолтное значение
-                self.setFromDefaults(kn,scr)
+                self.setFromDefaults(kn, scr)
         self.disableKnobsIfCustomCommand()
 
 def edit_script_info():
