@@ -368,7 +368,8 @@ def addScriptsFolderToPluginPath():
     TODO: Нужно делать исключения например для папок __pycache__.
     """
     for root, _, _ in os.walk(scriptsDir):  # Если папки не существует ошибки не будет, просто не запустится цикл
-        nuke.pluginAddPath(root.replace("\\", "/"))
+        if root != "__pycache__":
+            nuke.pluginAddPath(root.replace("\\", "/"))
 
 def createMenu():
     """
