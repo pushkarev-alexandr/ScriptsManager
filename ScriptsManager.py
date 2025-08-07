@@ -384,3 +384,20 @@ def createMenu():
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Update Users Menus", "ScriptsManager.updateUsersMenu()")  # Обновляет настройки для всех пользователей
     else:
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
+
+def setScriptStateForAllUsers(name: str, state: bool):
+    """Полезно когда нужно сразу всем пользователям поменять включен или выключен плагин"""
+    users_dir = f"{curDir}/users"
+    if not os.path.isdir(users_dir):  # Нужно проверить что существует папка с пользователями, перед следующей операцией os.listdir
+        return
+    for user in os.listdir(users_dir):  # Проходимся по папкам и файлам в папке со всеми пользователями
+        user_folder = f"{users_dir}/{user}"
+        if os.path.isdir(user_folder):  # Проверяем что это папка а не файл
+            user_data_file = f"{user_folder}/data.json"
+            if os.path.isfile(user_data_file):  # Проверяем что есть файл настроек
+                with open(user_data_file, "r", encoding="utf-8") as file:
+                    userData = json.load(file)
+                if name in userData:
+                    userData[name] = state
+                    with open(user_data_file, "w", encoding="utf-8") as file:
+                        json.dump(userData, file, indent=4, ensure_ascii=False)
