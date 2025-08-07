@@ -3,7 +3,7 @@ import os, json, getpass, re
 
 curDir = os.path.dirname(__file__).replace("\\", "/")  # Текущая папка
 infoFile = f"{curDir}/scripts_info.json"  # Необходимая информация о скриптах, заполняется в edit_script_info
-scriptsDir = f"{curDir}/scripts"  # Папка где лежат все скрипты
+scriptsDir = f"{os.path.dirname(curDir)}/scripts"  # Папка где лежат все скрипты
 userFolder = f"{curDir}/users/{getpass.getuser()}"  # С этой папки происходит загрузка менюшек для пользователя, у каждого пользователя своя папка
 userDataFile = f"{userFolder}/data.json"  # Информация о включенных/выключенных скриптах пользователя
 userMenuFile = f"{userFolder}/menu.py"  # Файл который будет создавать менюшки для пользователя
@@ -167,7 +167,7 @@ class EditScriptPanel(nukescripts.PythonPanel):
                          "menu_path": lambda s: f"{self.scripts[s]}/{self.knobs()['menu_name'].value()}"}
         # Описание всех необходимых кнобов
         self.script = nuke.Enumeration_Knob("script", "Скрипт", list(scripts.keys()))
-        self.script.setTooltip("Скрипт который хотим добавить или изменить. Список формируется из всех файлов с расширением .py в папке ScriptsManager/scripts.")
+        self.script.setTooltip("Скрипт который хотим добавить или изменить. Список формируется из всех файлов с расширением .py в папке scriptsDir.")
         self.default = nuke.Boolean_Knob("default", "Включен по умолчанию")
         self.default.setTooltip("Если у пользователя нет настроек для этого скрипта, автоматом будет устанавливаться в True. Также при загрузке нюка если у пользователя совсем нет настроек, то этот скрипт сразу добавится пользователю")
         self.default.setFlag(nuke.STARTLINE)
