@@ -97,10 +97,11 @@ def removeMenu(info: dict):
         m = nuke.menu("Nuke").menu(menu)
         if not m:  # Если такого меню не нашли будем искать просто в меню Nuke
             m = nuke.menu("Nuke")
-        if m.findItem(spl[-1]):  # Если нашли кнопку, удалим ее
+        # Делаем проверку что это Menu, потому что например Cache/Localization это MenuItem, а у MenuItem нету функции findItem
+        if isinstance(m, nuke.Menu) and m.findItem(spl[-1]):  # Если нашли кнопку, удалим ее
             m.removeItem(spl[-1])
         baseMenu = nuke.menu("Nuke").findItem(spl[0])  # Базовая папка меню(Udmurtia, File)
-        if not isinstance(baseMenu,nuke.Menu):  # Если в меню не осталось скриптов, оно становится MenuItem и тогда надо его удалить
+        if not isinstance(baseMenu, nuke.Menu):  # Если в меню не осталось скриптов, оно становится MenuItem и тогда надо его удалить
             nuke.menu("Nuke").removeItem(spl[0])
 
 def scripts_manager():
