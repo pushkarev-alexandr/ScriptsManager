@@ -622,5 +622,41 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "Custom/Custom Guides"
+    },
+    "CropKarma": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import CropKarma; CropKarma.export_crop_to_ndc()",
+        "custom_command": "",
+        "tooltip": "",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Projects/Mazhor/Crop Karma"
+    },
+    "combineZOLKarma": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import combineZOLKarma; combineZOLKarma.main()",
+        "custom_command": "",
+        "tooltip": "",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Projects/Mazhor/Combine ZOL Karma"
+    },
+    "SplitRenderZOL": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import SplitRenderZOL; SplitRenderZOL.SplitRender()",
+        "custom_command": "",
+        "tooltip": "Разделяет рендер по пасам с кастомной логикой, клонированием Grade и подгрузкой утилит",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Projects/Mazhor/Split Render ZOL"
     }
 }
