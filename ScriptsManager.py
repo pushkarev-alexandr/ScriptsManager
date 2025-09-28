@@ -407,3 +407,26 @@ def setScriptStateForAllUsers(name: str, state: bool):
                     userData[name] = state
                     with open(user_data_file, "w", encoding="utf-8") as file:
                         json.dump(userData, file, indent=4, ensure_ascii=False)
+
+# utility functions
+
+def get_default_script_state(script_name: str) -> bool:
+    """Получить состояние скрипта по умолчанию. Если информации нет, вернуть False."""
+    if not os.path.isfile(infoFile):
+        return False  # По умолчанию выключен
+    with open(infoFile, "r", encoding="utf-8") as file:
+        data = json.load(file)
+        return data.get(script_name, False)
+
+def get_script_state(script_name: str, username: str = None) -> bool:
+    """Получить состояние скрипта для указанного пользователя(текущего если не указан)."""
+    if username is None:
+        username = getpass.getuser()
+    userDataFile = f"{curDir}/users/{username}/data.json"
+    if os.path.isfile(userDataFile):
+        with open(userDataFile, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            if script_name in data:
+                return data[script_name]
+    
+    return get_default_script_state(script_name)
