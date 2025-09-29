@@ -370,10 +370,9 @@ def updateUsersMenu():
 def addScriptsFolderToPluginPath():
     """
     Добавляет все папки внутри папки scripts в pluginPath для доступа к ним.
-    TODO: Нужно делать исключения например для папок __pycache__.
     """
     for root, _, _ in os.walk(scriptsDir):  # Если папки не существует ошибки не будет, просто не запустится цикл
-        if root != "__pycache__":
+        if os.path.basename(root) not in ["__pycache__"]:
             nuke.pluginAddPath(root.replace("\\", "/"))
 
 def createMenu():
