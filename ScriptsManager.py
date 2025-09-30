@@ -390,6 +390,8 @@ def createMenu():
     else:
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
 
+# utility functions
+
 def setScriptStateForAllUsers(name: str, state: bool):
     """Полезно когда нужно сразу всем пользователям поменять включен или выключен плагин"""
     users_dir = f"{curDir}/users"
@@ -406,8 +408,6 @@ def setScriptStateForAllUsers(name: str, state: bool):
                     userData[name] = state
                     with open(user_data_file, "w", encoding="utf-8") as file:
                         json.dump(userData, file, indent=4, ensure_ascii=False)
-
-# utility functions
 
 def get_default_script_state(script_name: str) -> bool:
     """Получить состояние скрипта по умолчанию. Если информации нет, вернуть False."""
