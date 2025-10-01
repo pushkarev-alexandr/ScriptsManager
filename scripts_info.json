@@ -243,7 +243,7 @@
         "default": false,
         "custom_cmd_checkbox": true,
         "command": "import FooocusViewer; FooocusViewer.FooocusViewer()",
-        "custom_command": "import FooocusViewer\nnukescripts.registerWidgetAsPanel(\"FooocusViewer.ImageGallery\", \"Fooocus Viewer\", \"uk.co.thefoundry.FooocusViewer\")",
+        "custom_command": "import FooocusViewer\nnukescripts.registerWidgetAsPanel('FooocusViewer.ImageGallery', 'Fooocus Viewer', 'uk.co.thefoundry.FooocusViewer')",
         "tooltip": "Панель для Fooocus, отображает картинки сгенеренные через Fooocus",
         "icon": "",
         "shortcut": "",
@@ -588,10 +588,10 @@
         "menu_path": "CallbackScripts/Update Localization"
     },
     "renderLog": {
-        "default": false,
+        "default": true,
         "custom_cmd_checkbox": true,
         "command": "import renderLog; renderLog.renderLog()",
-        "custom_command": "import renderLog\nnuke.addAfterRender(renderLog.renderLog)\nnuke.menu(\"Nuke\").addCommand(\"GreenFX/File/Nk Script Path from Read\", \"import renderLog;renderLog.getRelatedScriptPath()\")",
+        "custom_command": "import renderLog\nnuke.addAfterRender(renderLog.renderLog)\nnuke.menu('Nuke').addCommand('GreenFX/File/Nk Script Path from Read', 'import renderLog;renderLog.getRelatedScriptPath()')",
         "tooltip": "После рендера сохраняет в базу путь до отрендеренного файла и путь до скрипта который этот файл отрендерил",
         "icon": "",
         "shortcut": "",
