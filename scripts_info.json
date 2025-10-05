@@ -663,7 +663,7 @@
         "default": true,
         "custom_cmd_checkbox": true,
         "command": "import AfanasyButtons; AfanasyButtons.AfanasyButtons()",
-        "custom_command": "nuke.menu('Nuke').addCommand('Render/Afanasy/Set Free', 'import AfanasyButtons; AfanasyButtons.setFree()')\nnuke.menu('Nuke').addCommand('Render/Afanasy/Eject and NIMBY', 'import AfanasyButtons; AfanasyButtons.ejectAndNIMBY()')",
+        "custom_command": "nuke.menu('Nuke').addCommand('Render/Afanasy/Set Free', 'import AfanasyButtons; AfanasyButtons.setFree()', icon='free.png')\nnuke.menu('Nuke').addCommand('Render/Afanasy/Eject and NIMBY', 'import AfanasyButtons; AfanasyButtons.ejectAndNIMBY()', icon='stop.png')",
         "tooltip": "Добавляет кнопки Set Free и Eject and NIMBY в Nuke",
         "icon": "",
         "shortcut": "",
