@@ -670,5 +670,29 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "Render/Afanasy Buttons"
+    },
+    "createReadFromWrite": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import createReadFromWrite; createReadFromWrite.createReadFromWrite()",
+        "custom_command": "",
+        "tooltip": "Creates a Read node from a Write node",
+        "icon": "",
+        "shortcut": "+r",
+        "shortcut_context": "2",
+        "index": -1,
+        "menu_path": "GreenFX/File/Read from Write"
+    },
+    "openInExplorer": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import openInExplorer; openInExplorer.openInExplorer()",
+        "custom_command": "",
+        "tooltip": "This script opens the folder containing the file referenced by the selected node in Nuke. If no node is selected, it opens the folder of the current script.",
+        "icon": "",
+        "shortcut": "Shift+B",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/File/Open in Explorer"
     }
 }
