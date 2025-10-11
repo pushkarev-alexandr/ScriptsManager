@@ -167,10 +167,10 @@
         "index": -1,
         "menu_path": "GreenFX/Projects/Mazhor/Combine ZOL"
     },
-    "linkBlurToErode": {
+    "createBlur": {
         "default": false,
         "custom_cmd_checkbox": false,
-        "command": "import linkBlurToErode; linkBlurToErode.linkBlurToErode()",
+        "command": "import createBlur; createBlur.main()",
         "custom_command": "",
         "tooltip": "When creating a Blur node, links its size to the Erode node if Erode was selected before creation",
         "icon": "",
@@ -694,5 +694,65 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/File/Open in Explorer"
+    },
+    "readShot": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import readShot; readShot.readShot()",
+        "custom_command": "",
+        "tooltip": "Откроет диалог выбора файла для указанного шота, работает как openScript",
+        "icon": "",
+        "shortcut": "^+r",
+        "shortcut_context": "2",
+        "index": -1,
+        "menu_path": "GreenFX/File/Read Shot"
+    },
+    "copyToNewVersion": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import copyToNewVersion; copyToNewVersion.copyToNewVersion()",
+        "custom_command": "",
+        "tooltip": "Copies all files of the selected Read node to a new version (tested only on sequences)",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/File/Copy to New Version"
+    },
+    "extendFrames": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import extendFrames; extendFrames.extendFrames()",
+        "custom_command": "",
+        "tooltip": "Extend frames for Read node",
+        "icon": "",
+        "shortcut": "Alt+Shift+D",
+        "shortcut_context": "2",
+        "index": -1,
+        "menu_path": "GreenFX/File/Extend Frames"
+    },
+    "bvfx_relativize": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import bvfx_relativize; bvfx_relativize.bvfx_relativize()",
+        "custom_command": "",
+        "tooltip": "This script will add a TCL expression to make all the file paths relatives in the script and keep original TCL/python functions in the file names",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/Make paths relative"
+    },
+    "collectFiles": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import collectFiles; collectFiles.collectFiles()",
+        "custom_command": "",
+        "tooltip": "",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/Collect Files"
     }
 }
