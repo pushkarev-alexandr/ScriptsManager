@@ -778,5 +778,77 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Proj/Clear nk folder"
+    },
+    "wbMultiKnobEdit": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import wbMultiKnobEdit; wbMultiKnobEdit.multiEditExec()",
+        "custom_command": "",
+        "tooltip": "Можно выделить несколько нод и изменять одинаковые кнобы у них одновременно",
+        "icon": "",
+        "shortcut": "F12",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Node/Multi Knob Edit Tool"
+    },
+    "batchKnobEdit": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import batchKnobEdit; batchKnobEdit.batchKnobEdit()",
+        "custom_command": "",
+        "tooltip": "Allows you to change the value of a specified parameter or set an expression for multiple selected nodes",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Node/Batch Knob Edit"
+    },
+    "lifetimeRoto": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import lifetimeRoto; lifetimeRoto.setRotoLifeTime()",
+        "custom_command": "",
+        "tooltip": "Можно выставить lifetime для выбранной кривой в рэндж по первому и последнему кадру анимации",
+        "icon": "",
+        "shortcut": "Shift+L",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Roto/Set Roto Lifetime"
+    },
+    "extractSelectedShapes": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import extractSelectedShapes; extractSelectedShapes.extractSelectedShapes()",
+        "custom_command": "",
+        "tooltip": "Можно в выбранном рото вытащить отдельные shapes сделав каждую в виде отдельной ноды",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Roto/Extract Selected Shapes"
+    },
+    "FollowPath": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import FollowPath; FollowPath.FollowPath()",
+        "custom_command": "",
+        "tooltip": "This script animates an object to move along a Roto or RotoPaint node's curve, automatically creating a Transform node with translation and rotation following the path",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Roto/Follow Path"
+    },
+    "moveRotoLifetime": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import moveRotoLifetime; moveRotoLifetime.moveRotoLifetime()",
+        "custom_command": "",
+        "tooltip": "Shifts the lifetime of elements in the Roto/RotoPaint node by the specified number of frames",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Roto/Move Lifetime"
     }
 }
