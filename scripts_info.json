@@ -754,5 +754,41 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Proj/Collect Files"
+    },
+    "WrapItUp": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import WrapItUp; WrapItUp.WrapItUp()",
+        "custom_command": "",
+        "tooltip": "Можно сделать коллект с помощью этого скрипта",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/Wrap It Up"
+    },
+    "scriptcleanup": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import scriptcleanup; scriptcleanup.scriptcleanup()",
+        "custom_command": "",
+        "tooltip": "Можно почистить скрипт от одиноких нод",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/Script Cleanup"
+    },
+    "clearNkFolder": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import clearNkFolder; clearNkFolder.clearNkFolder()",
+        "custom_command": "",
+        "tooltip": "Moves all Afanasy scripts, autosaves, and temporary files ending with a tilde to the autosave folder",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/Clear nk folder"
     }
 }
