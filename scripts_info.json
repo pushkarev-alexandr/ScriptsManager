@@ -119,18 +119,6 @@
         "index": -1,
         "menu_path": "GreenFX/Node Graph/View Mask"
     },
-    "WrapItUpFix": {
-        "default": false,
-        "custom_cmd_checkbox": false,
-        "command": "import WrapItUpFix; WrapItUpFix.WrapItUpFix()",
-        "custom_command": "",
-        "tooltip": "Fixes Read node names so that WrapItUp works correctly",
-        "icon": "",
-        "shortcut": "",
-        "shortcut_context": "Без контекста",
-        "index": -1,
-        "menu_path": "GreenFX/Utilities/WrapItUp Fix"
-    },
     "restoreNodeName": {
         "default": false,
         "custom_cmd_checkbox": false,
