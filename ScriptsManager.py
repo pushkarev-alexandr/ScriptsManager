@@ -273,15 +273,11 @@ def remove_script_info():
         nuke.message("Нужен файл scripts_info.json")
         return
     with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
-        info = json.load(file)
+        info: dict = json.load(file)
     p = nuke.Panel("Remove Script")
-    p.setWidth(226)
-    for script in info:
-        p.addBooleanCheckBox(script, False)
+    p.addEnumerationPulldown("Script", " ".join(list(info)))
     if p.show():
-        for script in list(info.keys()):  # list(info.keys()) помогает предотвратить ошибку RuntimeError: dictionary changed size during iteration потому что возвращает копию списка
-            if p.value(script):
-                info.pop(script)  # Можно использовать pop так как мы проходимся по копии списка используя list(info.keys())
+        info.pop(p.value("Script"))
         with open(infoFile, "w", encoding="utf-8") as file:
             json.dump(info, file, indent=4, ensure_ascii=False)
         updateUsersMenu()  # Обновляем настройки у пользователей, чтобы убрать только что удаленные скрипты
