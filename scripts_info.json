@@ -850,5 +850,29 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Roto/Move Lifetime"
+    },
+    "UpdateRenders": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import UpdateRenders; UpdateRenders.main()",
+        "custom_command": "",
+        "tooltip": "Вроде как подставляет новую версию рендера для выбранных ридов",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Render/Update Renders"
+    },
+    "SplitRender": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import SplitRender; SplitRender.SplitRender()",
+        "custom_command": "",
+        "tooltip": "Splits render by passes using shuffle",
+        "icon": "",
+        "shortcut": "Ctrl+Alt+S",
+        "shortcut_context": "2",
+        "index": -1,
+        "menu_path": "GreenFX/Render/Split Render"
     }
 }
