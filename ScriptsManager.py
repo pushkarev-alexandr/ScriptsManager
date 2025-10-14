@@ -9,7 +9,7 @@ userDataFile = f"{userFolder}/data.json"  # Информация о включе
 userMenuFile = f"{userFolder}/menu.py"  # Файл который будет создавать менюшки для пользователя
 scripts_manager_users = ["apushkarev", "pushk", "kzolototrubov"]  # Пользователи для которых создается менюшка для редактирования скриптов добавления и удаления информации о них
 
-def get_scripts(addToPluginPath=False):
+def get_scripts(addToPluginPath=False) -> dict:
     """
     Возвращает словарь со всеми найденными скриптами.
 
@@ -282,6 +282,20 @@ def remove_script_info():
             json.dump(info, file, indent=4, ensure_ascii=False)
         updateUsersMenu()  # Обновляем настройки у пользователей, чтобы убрать только что удаленные скрипты
 
+def setScriptStateForAllUsersUI():
+    """Окно для установки состояния скрипта для всех пользователей"""
+    if not os.path.isfile(infoFile):
+        nuke.message("Нужен файл scripts_info.json")
+        return
+    with open(infoFile, "r", encoding="utf-8") as file:  # Читаем данные из info файла
+        info: dict = json.load(file)
+    p = nuke.Panel("Set Script State For All Users")
+    p.addEnumerationPulldown("Script", " ".join(list(info)))
+    p.addEnumerationPulldown("State", "Enable Disable")
+    if p.show():
+        setScriptStateForAllUsers(p.value("Script"), p.value("State")=="Enable")
+        nuke.message("Successfully set!")
+
 def createUserDefaultSettings(userDataFile=userDataFile, userMenuFile=userMenuFile):
     """
     При загрузке Nuke создает для пользователя дефолтные настройки, если у него их еще нет.
@@ -382,6 +396,7 @@ def createMenu():
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Edit Scripts Info", "ScriptsManager.edit_script_info()")  # Добавление/изменение информации о скрипте
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Remove Script", "ScriptsManager.remove_script_info()")  # Удаление скриптов
+        nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Set Script State For All Users", "ScriptsManager.setScriptStateForAllUsersUI()")  # Позволяет сразу всем пользователям включить или выключить скрипт
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager/Update Users Menus", "ScriptsManager.updateUsersMenu()")  # Обновляет настройки для всех пользователей
     else:
         nuke.menu("Nuke").addCommand("Edit/Scripts Manager", "ScriptsManager.scripts_manager()")  # Позволяет включать и выключать скрипты
@@ -394,16 +409,13 @@ def setScriptStateForAllUsers(name: str, state: bool):
     if not os.path.isdir(users_dir):  # Нужно проверить что существует папка с пользователями, перед следующей операцией os.listdir
         return
     for user in os.listdir(users_dir):  # Проходимся по папкам и файлам в папке со всеми пользователями
-        user_folder = f"{users_dir}/{user}"
-        if os.path.isdir(user_folder):  # Проверяем что это папка а не файл
-            user_data_file = f"{user_folder}/data.json"
-            if os.path.isfile(user_data_file):  # Проверяем что есть файл настроек
-                with open(user_data_file, "r", encoding="utf-8") as file:
-                    userData = json.load(file)
-                if name in userData:
-                    userData[name] = state
-                    with open(user_data_file, "w", encoding="utf-8") as file:
-                        json.dump(userData, file, indent=4, ensure_ascii=False)
+        user_data_file = f"{users_dir}/{user}/data.json"
+        if os.path.isfile(user_data_file):  # Проверяем что есть файл настроек
+            with open(user_data_file, "r", encoding="utf-8") as file:
+                userData = json.load(file)
+            userData[name] = state
+            with open(user_data_file, "w", encoding="utf-8") as file:
+                json.dump(userData, file, indent=4, ensure_ascii=False)
 
 def get_default_script_state(script_name: str) -> bool:
     """Получить состояние скрипта по умолчанию. Если информации нет, вернуть False."""
