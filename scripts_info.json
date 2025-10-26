@@ -1066,5 +1066,65 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Viewer/Viewer Input Nodes"
+    },
+    "FixColorPickerWindow": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import FixColorPickerWindow; FixColorPickerWindow.main()",
+        "custom_command": "",
+        "tooltip": "When the Color Picker window goes off-screen, resets its position by removing the line in uistate.ini",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Fix Color Picker Window"
+    },
+    "FixFrameRangeIsNotCallable": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import FixFrameRangeIsNotCallable; FixFrameRangeIsNotCallable.main()",
+        "custom_command": "",
+        "tooltip": "Fix for \"range is not callable\" error",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Fix FrameRange is not callable"
+    },
+    "LibraryCollects": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import LibraryCollects; LibraryCollects.LibraryCollects()",
+        "custom_command": "import LibraryCollects",
+        "tooltip": "Автоматическое создание меню для скриптов с футажами из папки _Collect_in_nuke_scripts",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/LibraryCollects/Library Collects"
+    },
+    "setColorspace": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import setColorspace; setColorspace.setColorspace()",
+        "custom_command": "import setColorspace\nsetColorspace.addColorspaceMenu(nuke.menu('Nuke').menu('GreenFX'))",
+        "tooltip": "Hotkeys for colorspaces",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Colorspace/Set Colorspace"
+    },
+    "shortcuts": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import shortcuts; shortcuts.shortcuts()",
+        "custom_command": "import shortcuts\nshortcuts.createShortcutsMenu(nuke.menu('Nuke').menu('GreenFX'))",
+        "tooltip": "Creates a menu of shortcuts for commonly used nodes",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Hotkeys/Shortcuts"
     }
 }
