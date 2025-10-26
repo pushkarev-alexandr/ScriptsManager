@@ -994,5 +994,77 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Node Graph/Sticky Shot Name"
+    },
+    "mocha_retarget": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import mocha_retarget; mocha_retarget.mocha_retarget()",
+        "custom_command": "",
+        "tooltip": "Меняет ключевой кадр корнерпина экспорченного из мокки",
+        "icon": "",
+        "shortcut": "Alt+R",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Mocha/mocha retarget"
+    },
+    "send_to_mocha": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import send_to_mocha; send_to_mocha.send_to_mocha()",
+        "custom_command": "",
+        "tooltip": "Откроет выбранный Read в Stand Alone версии MochaPro. Найдет последнюю установленную версию на компьютере",
+        "icon": "mocha.png",
+        "shortcut": "Alt+M",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Mocha/Send to mocha"
+    },
+    "sb_deleteViewers": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import sb_deleteViewers; sb_deleteViewers.sb_deleteViewers()",
+        "custom_command": "",
+        "tooltip": "Удалит все вьюверы, даже те которые внутри гизм и групп",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Viewer/Delete All Viewers"
+    },
+    "viewerJumper": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import viewerJumper; viewerJumper.viewerJumper()",
+        "custom_command": "nuke.menu('Nuke').addCommand('GreenFX/Viewer/Jump Right', 'import viewerJumper; viewerJumper.viewerJumper(right=True)', 'Ctrl+Right', shortcutContext=2)\nnuke.menu('Nuke').addCommand('GreenFX/Viewer/Jump Left', 'import viewerJumper; viewerJumper.viewerJumper(right=False)', 'Ctrl+Left', shortcutContext=2)",
+        "tooltip": "Can jump between adjacent Read nodes",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Viewer/Viewer Jumper"
+    },
+    "toggleMaskingMode": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import toggleMaskingMode; toggleMaskingMode.toggleMaskingMode()",
+        "custom_command": "",
+        "tooltip": "Toggles masking mode",
+        "icon": "",
+        "shortcut": "Ctrl+Alt+D",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Viewer/Toggle Masking Mode"
+    },
+    "viewerInputNodes": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import viewerInputNodes; viewerInputNodes.viewerInputNodes()",
+        "custom_command": "ip = nuke.menu('Nuke').menu('GreenFX').menu('Viewer').addMenu('Input Process', icon='IP.png')\nip.addCommand('HSV IP', 'import viewerInputNodes; viewerInputNodes.viewerInput(ipNode=\"HSV\")')\nip.addCommand('Normalize IP', 'import viewerInputNodes; viewerInputNodes.viewerInput(ipNode=\"Normalize\")')\nip.addCommand('Mirror IP', 'import viewerInputNodes; viewerInputNodes.viewerInput(ipNode=\"Mirror\")')\nip.addCommand('Choose from list', 'import viewerInputNodes; viewerInputNodes.viewerInput()')\nip.addCommand('Remove IP', 'import viewerInputNodes; viewerInputNodes.viewerInput(ipNode=\"Remove\")')",
+        "tooltip": "Можно выбрать из преднастроек какой input process включить",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Viewer/Viewer Input Nodes"
     }
 }
