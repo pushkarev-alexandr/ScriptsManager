@@ -1005,7 +1005,7 @@
         "shortcut": "Alt+R",
         "shortcut_context": "Без контекста",
         "index": -1,
-        "menu_path": "GreenFX/Mocha/mocha retarget"
+        "menu_path": "GreenFX/Transform/mocha retarget"
     },
     "send_to_mocha": {
         "default": true,
@@ -1017,7 +1017,7 @@
         "shortcut": "Alt+M",
         "shortcut_context": "Без контекста",
         "index": -1,
-        "menu_path": "GreenFX/Mocha/Send to mocha"
+        "menu_path": "GreenFX/Bridge/Send to mocha"
     },
     "sb_deleteViewers": {
         "default": false,
@@ -1126,5 +1126,197 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Hotkeys/Shortcuts"
+    },
+    "CreateOutTrack": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import CreateOutTrack; CreateOutTrack.main()",
+        "custom_command": "if nuke.env['studio']:\n    nuke.menu('Nuke').addCommand('GreenFX/Timeline/Create Out Track', 'import CreateOutTrack; CreateOutTrack.main()')",
+        "tooltip": "Создает в текущей сиквенции дорожку out и для каждого prm с дорожки prm подтягивает соответствующий ему хайрез",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Timeline/Create Out Track"
+    },
+    "bakeGizmos": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import bakeGizmos; bakeGizmos.bakeGizmosEnhanced()",
+        "custom_command": "",
+        "tooltip": "Забейкает выбранные ноды или все ноды в текущем скрипте если ничего не выбрано",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Node/Bake Gizmos"
+    },
+    "sb_listExternalNodes": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import sb_listExternalNodes; sb_listExternalNodes.sb_listExternalNodes()",
+        "custom_command": "",
+        "tooltip": "Покажет нестандартные ноды в текущем скрипте(полезно если нужно передать кому-то скрипт и посмотреть нет ли каких-то внешних зависимостей)",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Proj/List External Nodes"
+    },
+    "localizeFolder": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import localizeFolder; localizeFolder.main()",
+        "custom_command": "",
+        "tooltip": "Allows you to localize a folder and all its contents",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Cache/Localization/Localize Folder"
+    },
+    "switchKeyframePreviews": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import switchKeyframePreviews; switchKeyframePreviews.switchKeyframePreviews()",
+        "custom_command": "",
+        "tooltip": "Disables Keyframe Previews to prevent the Tracker node from hanging",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Switch Keyframe Previews"
+    },
+    "CloseAllProperties": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import CloseAllProperties; CloseAllProperties.CloseAllProperties()",
+        "custom_command": "",
+        "tooltip": "Closes all property boxes at once (especially useful if you like to use floating windows)",
+        "icon": "",
+        "shortcut": "Shift+Q",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Close All Tabs"
+    },
+    "channel_hotbox": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import channel_hotbox; channel_hotbox.start()",
+        "custom_command": "",
+        "tooltip": "Можно переключать каналы и создавать Shuffle для выбранного какнала(с зажатым Shift), с зажатым Ctrl создаст Grade",
+        "icon": "",
+        "shortcut": "Alt+Q",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Channels/Channel Hotbox"
+    },
+    "ViewInCut": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import ViewInCut; ViewInCut.ViewInCut()",
+        "custom_command": "",
+        "tooltip": "Можно создать ViewInCut для выбранной ноды Read или Write",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Render/View In Cut"
+    },
+    "sendToAfterEffects": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import sendToAfterEffects; sendToAfterEffects.sendToAfterEffects()",
+        "custom_command": "",
+        "tooltip": "Opens the selected sequence in After Effects, creates a composition, and saves the project",
+        "icon": "after-effects.png",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Bridge/Send to After Effects"
+    },
+    "ScriptsTab": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import ScriptsTab; ScriptsTab.runScriptsTab()",
+        "custom_command": "",
+        "tooltip": "Allows you to execute scripts from the top menu using Tab, similar to how nodes are added via Tab",
+        "icon": "",
+        "shortcut": "Ctrl+Tab",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Scripts Tab"
+    },
+    "favoritesDirectories": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import favoritesDirectories; favoritesDirectories.favoritesDirectories()",
+        "custom_command": "import favoritesDirectories",
+        "tooltip": "When opening a script in the favorites chooser, a folder named 'nk' is added, which points to the folder where the currently opened script is stored",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "CallbackScripts/Favorites Directories"
+    },
+    "MenuScriptsViewer": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import MenuScriptsViewer; MenuScriptsViewer.main()",
+        "custom_command": "",
+        "tooltip": "Displays the script string associated with the selected Nuke menu item, if available.",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Utilities/Menu Scripts Viewer"
+    },
+    "duplicateWithInputs": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import duplicateWithInputs; duplicateWithInputs.duplicateWithInputs()",
+        "custom_command": "nuke.menu('Nuke').addCommand('GreenFX/Node Graph/Duplicate with Inputs/copy', 'import duplicateWithInputs; duplicateWithInputs.copyWithInputs()', 'Ctrl+Alt+Shift+C')\nnuke.menu('Nuke').addCommand('GreenFX/Node Graph/Duplicate with Inputs/paste', 'import duplicateWithInputs; duplicateWithInputs.pasteWithInputs()', 'Ctrl+Shift+V')\nnuke.menu('Nuke').addCommand('GreenFX/Node Graph/Duplicate with Inputs/duplicate', 'import duplicateWithInputs; duplicateWithInputs.duplicateWithInputs()', 'Ctrl+Shift+D')",
+        "tooltip": "Можно скопировать, вставить или сдублировать выделенную ноду не отсоединяя её инпутов",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Node Graph/Duplicate With Inputs"
+    },
+    "clipboard_paste": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import clipboard_paste; clipboard_paste.paste_image_from_clipboard()",
+        "custom_command": "",
+        "tooltip": "Можно скопировать изображение в интернете и хоть где угодно в буфер обмена и вставить его в нюке, оно сохранится рядом со скриптом",
+        "icon": "",
+        "shortcut": "Ctrl+Alt+V",
+        "shortcut_context": "Без контекста",
+        "index": 7,
+        "menu_path": "Edit/Paste Image from Clipboard"
+    },
+    "bufferSaveLoad": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import bufferSaveLoad; bufferSaveLoad.bufferSaveLoad()",
+        "custom_command": "import bufferSaveLoad",
+        "tooltip": "",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Buffer/Buffer Save Load"
+    },
+    "autosave_backup": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import autosave_backup; autosave_backup.autosave_backup()",
+        "custom_command": "import autosave_backup",
+        "tooltip": "Вместо дефолтного одного автосейва сохраняется 4 штуки по очереди, происходит ротация автосейвов",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "CallbackScripts/Autosave Backup"
     }
 }
