@@ -57,6 +57,13 @@ def writeAndAddMenu(file, info, createMenus=False):
             if createMenus:
                 nuke.menu("Nuke").addCommand(menu_path, command, shortcut, icon=icon, index=index)
 
+def get_in_menu_name(menu_path, strip = True):
+    spl = menu_path.split("/")
+    if len(spl) > 1 and spl[-2].endswith("\\"):
+        part = spl[-2].rstrip("\\") if strip else spl[-2]
+        return f"{part}/{spl[-1]}"
+    return spl[-1]
+
 class ScriptsManagerPanel(nukescripts.PythonPanel):
     """Kласс для окна включения/выключения скриптов пользователем"""
     def __init__(self, scripts, info, userData):
@@ -68,7 +75,8 @@ class ScriptsManagerPanel(nukescripts.PythonPanel):
         for scr in scripts:  # Проходимся по каждому скрипту в алфавитном порядке
             if info.get(scr):  # Если есть информация о скрипте
                 menu_path = info[scr]["menu_path"]
-                kn = nuke.Boolean_Knob(scr, menu_path.split("/")[-1])  # Создаем для него кноб
+                in_menu_name = get_in_menu_name(menu_path, True)
+                kn = nuke.Boolean_Knob(scr, in_menu_name)  # Создаем для него кноб
                 kn.setFlag(nuke.STARTLINE)
                 if userData and userData.get(scr)!=None:  # Если уже есть записанные данные для пользователя, подставим их
                     kn.setValue(userData[scr])
@@ -237,7 +245,7 @@ class EditScriptPanel(nukescripts.PythonPanel):
                     kn.setValue(info[kn.name()])
                 else:
                     self.setFromDefaults(kn,scr)  # Если не удалось найти параметр в info, установим значение по умолчанию
-            self.menu_name.setValue(info["menu_path"].split("/")[-1])  # Выставляем menu_name из menu_path
+            self.menu_name.setValue(get_in_menu_name(info["menu_path"], False))  # Выставляем menu_name из menu_path
             self.menu_path.setValue(f"{self.scripts[scr]}/{self.menu_name.value()}")  # Затем выставляем menu_path из scripts(на случай если мы переместили скрипт в новое место)
         else:  # Дефолтные значения для кнобов
             for kn in self.my_knobs[1:]:  # Для каждого кноба ищем дефолтное значение
