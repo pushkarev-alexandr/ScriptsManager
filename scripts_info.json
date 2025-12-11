@@ -1307,18 +1307,6 @@
         "index": -1,
         "menu_path": "Buffer/Buffer Save Load"
     },
-    "autosave_backup": {
-        "default": true,
-        "custom_cmd_checkbox": true,
-        "command": "import autosave_backup; autosave_backup.autosave_backup()",
-        "custom_command": "import autosave_backup",
-        "tooltip": "Вместо дефолтного одного автосейва сохраняется 4 штуки по очереди, происходит ротация автосейвов",
-        "icon": "",
-        "shortcut": "",
-        "shortcut_context": "Без контекста",
-        "index": -1,
-        "menu_path": "CallbackScripts/Autosave Backup"
-    },
     "AnimationMaker": {
         "default": true,
         "custom_cmd_checkbox": true,
@@ -1402,18 +1390,6 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/3D/Animated Snap 3D"
-    },
-    "autosaveToFolder": {
-        "default": true,
-        "custom_cmd_checkbox": true,
-        "command": "import autosaveToFolder; autosaveToFolder.autosaveToFolder()",
-        "custom_command": "import autosaveToFolder",
-        "tooltip": "Sets Nuke's autosave to the 'autosaves' folder next to the script",
-        "icon": "",
-        "shortcut": "",
-        "shortcut_context": "Без контекста",
-        "index": -1,
-        "menu_path": "Custom/Autosave To Folder"
     },
     "BakeAnimation": {
         "default": false,
@@ -1720,11 +1696,35 @@
         "custom_cmd_checkbox": false,
         "command": "import postageStampOnOff; postageStampOnOff.postageStampOnOff()",
         "custom_command": "",
-        "tooltip": "",
+        "tooltip": "Same as the standard Postage Stamp On/Off, but if no nodes are selected, it toggles the postage stamp for all Read nodes",
         "icon": "",
         "shortcut": "Alt+P",
         "shortcut_context": "2",
         "index": 8,
         "menu_path": "Edit/Node/Postage Stamp On\\/Off"
+    },
+    "openScript": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import openScript; openScript.openScript()",
+        "custom_command": "import openScript",
+        "tooltip": "Быстрый удобный способ открыть скрипт",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "File/Open Script"
+    },
+    "autosave": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import autosave; autosave.autosave()",
+        "custom_command": "import autosave",
+        "tooltip": "Rolling Autosaves",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "CallbackScripts/Autosave"
     }
 }
