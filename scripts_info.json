@@ -1726,5 +1726,77 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "CallbackScripts/Autosave"
+    },
+    "removeInput": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import removeInput; removeInput.removeInput()",
+        "custom_command": "",
+        "tooltip": "Extends the standard Edit/Remove Input command: if no node is selected, disconnects inputs from all viewers",
+        "icon": "",
+        "shortcut": "Ctrl+D",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Edit/Remove Input"
+    },
+    "renderCMD": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "command": "import renderCMD; renderCMD.renderCMD()",
+        "custom_command": "",
+        "tooltip": "Renders selected Write nodes over the global range via command line",
+        "icon": "",
+        "shortcut": "F6",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Render/Render CMD"
+    },
+    "renderRange": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "command": "import renderRange; renderRange.renderRange()",
+        "custom_command": "nuke.menu('Nuke').addCommand('Render/Render Range/Global', 'import renderRange; renderRange.renderGlobalRange()', 'F5')\nnuke.menu('Nuke').addCommand('Render/Render Range/Input', 'import renderRange; renderRange.renderInputRange()', 'Ctrl+Shift+F5')\nnuke.menu('Nuke').addCommand('Render/Render Range/In\\/Out', 'import renderRange; renderRange.renderInOutRange()', 'Ctrl+Alt+Shift+F5')\nnuke.menu('Nuke').addCommand('Render/Render Range/Current Frame', 'import renderRange; renderRange.renderCurrentFrame()', 'Ctrl+Alt+F5')",
+        "tooltip": "Renders selected nodes over the global range, launches afanasy node over afanasy node's range, presses updateLocalization button on selected Read node",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Render/Render Range"
+    },
+    "shotNumberUpDown": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import shotNumberUpDown; shotNumberUpDown.shotNumberUpDown()",
+        "custom_command": "nuke.menu('Nuke').addCommand('GreenFX/File/Shot Number Up', 'import shotNumberUpDown; shotNumberUpDown.shotNumberUpDown(False)', 'Alt+Right', shortcutContext=2)\nnuke.menu('Nuke').addCommand('GreenFX/File/Shot Number Down', 'import shotNumberUpDown; shotNumberUpDown.shotNumberUpDown(True)', 'Alt+Left', shortcutContext=2)",
+        "tooltip": "Поднимает/опускает номер шота для выбранной ноды Read",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/File/Shot Number Up Down"
+    },
+    "versionToLatest": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import versionToLatest; versionToLatest.versionToLatest()",
+        "custom_command": "",
+        "tooltip": "Replaces the standard Nuke \"Version To Latest\" behavior. The default script stops at the first missing version (e.g., with v6 and v8 present but no v7, a v2 read would only jump to v6); this script continues to the highest available version (v8 in that example).",
+        "icon": "",
+        "shortcut": "Alt+Shift+Up",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "Edit/Node/Filename/Version to Latest"
+    },
+    "stamps": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import stamps; stamps.stamps()",
+        "custom_command": "import stamps",
+        "tooltip": "Инструмент для Nuke, который создаёт пустые NoOp ноды, связанные с выбранной нодой через скрытое подключение, к которым можно подсоединяться из любой части графа. Полезен в больших скриптах, чтобы избежать длинных связей и сохранить граф чистым и читаемым",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1,
+        "menu_path": "GreenFX/Node Graph/stamps/Stamps"
     }
 }
