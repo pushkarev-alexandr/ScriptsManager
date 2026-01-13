@@ -1,0 +1,26 @@
+{
+    "test_script_2": {
+        "default": false,
+        "custom_cmd_checkbox": true,
+        "command": "import test_script_2; test_script_2.run()",
+        "custom_command": "custom_command_here",
+        "tooltip": "Второй тестовый скрипт с кастомной командой",
+        "icon": "test_icon.png",
+        "shortcut": "Ctrl+2",
+        "shortcut_context": "Window",
+        "index": 2,
+        "menu_path": "Test/Script 2"
+    },
+    "test_script_1": {
+        "default": true,
+        "custom_cmd_checkbox": false,
+        "command": "import test_script_1; test_script_1.run()",
+        "custom_command": "",
+        "tooltip": "Первый тестовый скрипт для проверки функциональности",
+        "icon": "",
+        "shortcut": "Ctrl+1",
+        "shortcut_context": "Без контекста",
+        "index": 1,
+        "menu_path": "Test/Script 1"
+    }
+}
