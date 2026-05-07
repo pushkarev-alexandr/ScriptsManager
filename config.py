@@ -20,8 +20,7 @@ USER_DATA_FILE = f"{USER_FOLDER}/data.json"
 USER_MENU_FILE = f"{USER_FOLDER}/menu.py"
 
 # Пользователи с правами администратора
-ADMIN_USERS = ["apushkarev", "pushk", "kzolototrubov"]
-ADMIN_USERS = []
+ADMIN_USERS = ["apushkarev", "pushk"]
 
 # Контексты горячих клавиш
 SHORTCUT_CONTEXTS = {

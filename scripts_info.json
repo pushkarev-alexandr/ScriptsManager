@@ -1798,5 +1798,17 @@
         "shortcut_context": "Без контекста",
         "index": -1,
         "menu_path": "GreenFX/Node Graph/stamps/Stamps"
+    },
+    "openRecentProject": {
+        "default": false,
+        "custom_cmd_checkbox": false,
+        "menu_path": "File/Open Recent Project",
+        "command": "import openRecentProject; openRecentProject.openRecentProject()",
+        "custom_command": "",
+        "tooltip": "Shows the recent projects in a list and allows to open them by clicking on the item or using the number shortcut",
+        "icon": "",
+        "shortcut": "Alt+Shift+O",
+        "shortcut_context": "Без контекста",
+        "index": 2
     }
 }
