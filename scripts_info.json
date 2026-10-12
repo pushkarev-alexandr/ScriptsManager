@@ -1810,5 +1810,17 @@
         "shortcut": "Alt+Shift+O",
         "shortcut_context": "Без контекста",
         "index": 2
+    },
+    "local_files_to_nuke": {
+        "default": true,
+        "custom_cmd_checkbox": true,
+        "menu_path": "CallbackScripts/Local_Files_To_Nuke",
+        "command": "import local_files_to_nuke; local_files_to_nuke.local_files_to_nuke()",
+        "custom_command": "import local_files_to_nuke\nlocal_files_to_nuke.install_callbacks()",
+        "tooltip": "",
+        "icon": "",
+        "shortcut": "",
+        "shortcut_context": "Без контекста",
+        "index": -1
     }
 }
