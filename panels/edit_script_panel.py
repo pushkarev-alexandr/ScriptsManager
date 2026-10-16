@@ -97,6 +97,11 @@ class EditScriptPanel(QDialog):
         self.custom_cmd_checkbox = QCheckBox("Кастомная команда")
         self.custom_cmd_checkbox.setToolTip("Включит режим в котором нужно самому ввести команду которая будет выполняться при запуске программы и создавать меню или назначать колбэки")
         main_form.addRow(self.custom_cmd_checkbox)
+
+        self.tooltip_widget = QTextEdit()
+        self.tooltip_widget.setMaximumHeight(60)
+        self.tooltip_widget.setToolTip("Описание скрипта которое будет показываться при наведении мышки на скрипт в меню Script Manager")
+        main_form.addRow("Описание:", self.tooltip_widget)
         
         main_group.setLayout(main_form)
         scroll_layout.addWidget(main_group)
@@ -112,11 +117,6 @@ class EditScriptPanel(QDialog):
         self.command_widget = QLineEdit()
         self.command_widget.setToolTip("Команда которая будет выполняться при нажатии на кнопку вызова скрипта")
         standard_form.addRow("Команда:", self.command_widget)
-        
-        self.tooltip_widget = QTextEdit()
-        self.tooltip_widget.setMaximumHeight(60)
-        self.tooltip_widget.setToolTip("Описание скрипта которое будет показываться при наведении мышки на скрипт в меню Script Manager")
-        standard_form.addRow("Описание:", self.tooltip_widget)
         
         self.icon_widget = QLineEdit()
         self.icon_widget.setToolTip("Иконка для менюшки скрипта. Нужно писать с расширением, к примеру icon.png")
